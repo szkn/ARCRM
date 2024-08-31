@@ -40,24 +40,35 @@ const ContactForm = () => {
   };
 
   const sendForm = async (domain: string) => {
-    // TODO: 実際のAPI呼び出しを実装
-    console.log('お問合せ送信:', { 
-      domain, 
-      nameLast, 
-      nameFirst, 
-      nameKanaLast, 
-      nameKanaFirst, 
-      email, 
-      subject, 
-      company, 
-      title, 
-      department, 
-      phone: `${phone1}-${phone2}-${phone3}`,
-      postalCode: `${postalCode1}-${postalCode2}`,
-      message 
-    });
-    // 擬似的な遅延を追加
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch(`https://your-api-endpoint.com/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          domain,
+          nameLast,
+          nameFirst,
+          nameKanaLast,
+          nameKanaFirst,
+          email,
+          subject,
+          company,
+          title,
+          department,
+          phone: `${phone1}-${phone2}-${phone3}`,
+          postalCode: `${postalCode1}-${postalCode2}`,
+          message,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
   };
 
   return (

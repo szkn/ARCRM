@@ -101,6 +101,7 @@ const Login = () => {
             パスワードをお忘れの方
           </Link>
           
+        {/*
           <div className={styles.divider}>
             <span>外部アカウントでログイン</span>
           </div>
@@ -113,6 +114,7 @@ const Login = () => {
               <FcGoogle /> Googleアカウントでログイン
             </button>
           </div>
+          */}
           
           <Link href="/signup" className={styles.createAccount}>
             新しく企業アカウントを作成する
