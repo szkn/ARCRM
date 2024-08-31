@@ -1,39 +1,87 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import styles from '../styles/Home.module.css';
 import CompanyList from '../components/CompanyList';
 import EmailTool from '../components/EmailTool';
 import ContactForm from '../components/ContactForm';
+import { userPool } from '../lib/cognitoConfig';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('companies');
+  const [username, setUsername] = useState('');
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const cognitoUser = userPool.getCurrentUser();
+      if (cognitoUser) {
+        cognitoUser.getSession((err: any, session: any) => {
+          if (err) {
+            router.push('/login');
+          } else if (session.isValid()) {
+            cognitoUser.getUserAttributes((err, attributes) => {
+              if (err) {
+                console.error(err);
+              } else {
+                const nameAttribute = attributes?.find(attr => attr.Name === 'name');
+                setUsername(nameAttribute?.Value || 'ユーザー名');
+              }
+            });
+          }
+        });
+      } else {
+        router.push('/login');
+      }
+    };
+    checkAuth();
+  }, []);
+
+  const tabs = [
+    { id: 'companies', label: '会社情報一覧' },
+    { id: 'email', label: 'メール自動送信ツール' },
+    { id: 'contact', label: 'お問合せフォーム' },
+  ];
+
+  const handleLogout = () => {
+    const cognitoUser = userPool.getCurrentUser();
+    if (cognitoUser) {
+      cognitoUser.signOut();
+    }
+    router.push('/login');
+  };
+
+    // 認証されていない場合は何も表示しない
+    if (!username) {
+      return null;
+    }
 
   return (
     <div className={styles.container}>
-      <h1>CRMシステム</h1>
-      <div className={styles.tabContainer}>
-        <div
-          className={`${styles.tab} ${activeTab === 'companies' ? styles.active : ''}`}
-          onClick={() => setActiveTab('companies')}
-        >
-          会社情報一覧
+      <header className={styles.header}>
+        <h1 className={styles.title}>ARC CRM</h1>
+        <div className={styles.userInfo}>
+          <span>{username}</span>
+          <button onClick={handleLogout} className={styles.logoutButton}>ログアウト</button>
         </div>
-        <div
-          className={`${styles.tab} ${activeTab === 'email' ? styles.active : ''}`}
-          onClick={() => setActiveTab('email')}
-        >
-          メール自動送信ツール
-        </div>
-        <div
-          className={`${styles.tab} ${activeTab === 'contact' ? styles.active : ''}`}
-          onClick={() => setActiveTab('contact')}
-        >
-          お問合せフォーム自動送信ツール
-        </div>
-      </div>
+      </header>
       <div className={styles.content}>
-        {activeTab === 'companies' && <CompanyList />}
-        {activeTab === 'email' && <EmailTool />}
-        {activeTab === 'contact' && <ContactForm />}
+        <nav className={styles.sidebar}>
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`${styles.tab} ${activeTab === tab.id ? styles.activeTab : ''}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </nav>
+        <main className={styles.mainContent}>
+          {activeTab === 'companies' && <CompanyList />}
+          {activeTab === 'email' && <EmailTool />}
+          {activeTab === 'contact' && <ContactForm />}
+        </main>
       </div>
     </div>
   );

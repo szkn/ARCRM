@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
+interface Company {
+  id: number;
+  name: string;
+  industry: string;
+}
+
 const CompanyList = () => {
-  const [companies, setCompanies] = useState([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -27,6 +33,7 @@ const CompanyList = () => {
           placeholder="業界で検索"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.formInput}
         />
       </div>
       <table className={styles.table}>

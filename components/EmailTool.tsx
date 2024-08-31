@@ -16,7 +16,7 @@ const EmailTool = () => {
   return (
     <>
       <h2>メール自動送信ツール</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div>
           <label htmlFor="subject">件名</label>
           <input
@@ -25,6 +25,7 @@ const EmailTool = () => {
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             required
+            className={styles.formInput}
           />
         </div>
         <div>
@@ -34,6 +35,7 @@ const EmailTool = () => {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             required
+            className={styles.formTextarea}
           />
         </div>
         <div>
@@ -44,9 +46,10 @@ const EmailTool = () => {
             value={recipients}
             onChange={(e) => setRecipients(e.target.value)}
             required
+            className={styles.formInput}
           />
         </div>
-        <button type="submit">送信</button>
+        <button type="submit" className={styles.submitButton}>送信</button>
       </form>
     </>
   );
