@@ -1,7 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  border-radius: 20px;
+  overflow: hidden; 
 }
 
 .header {
@@ -12,15 +17,146 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .main {
-  padding: 5rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
+}
+
+.loginBox {
+  max-width: 360px;
+  width: 100%;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoContainer {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%; /* フォームの幅を100%に設定 */
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.loginButton {
+  width: 100%;
+  background-color: #3366cc;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+  display: block;
+}
+
+.loginButton:hover {
+  background-color: #2855b0;
+}
+
+.forgotPassword {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.divider span {
+  padding: 0 0.5rem;
+  color: #666;
+}
+
+.externalLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%; /* 外部ログインボタンの幅を100%に設定 */
+}
+.microsoftLogin,
+.googleLogin {
+  width: 100%; /* Microsoftと Googleログインボタンの幅を100%に設定 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+.microsoftLogin:hover,
+.googleLogin:hover {
+  background-color: #f5f5f5;
+}
+
+.microsoftLogin {
+  color: #0078d4;
+}
+
+.googleLogin {
+  color: #4285f4;
+}
+
+.createAccount {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+  color: #3366cc;
+  text-decoration: none;
 }
 
 .footer {
@@ -43,11 +179,18 @@
 
 .logoutButton {
   margin-left: 10px;
-  padding: 5px 10px;
-  background-color: #004040;
+  padding: 8px 15px;
+  background-color: #1a5f7a;  /* 藍色の背景 */
   color: white;
   border: none;
+  border-radius: 4px;  /* 角丸を追加 */
   cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;  /* ホバー効果のためのトランジション */
+}
+
+.logoutButton:hover {
+  background-color: #134d63;  /* ホバー時の少し暗い色 */
 }
 
 .description {
@@ -105,21 +248,24 @@
   width: 5rem;
 }
 
-.formInput,
-.formInput[type="text"],
-.formInput[type="email"],
-.formTextarea {
-  margin-bottom: 1rem;
+.formInput {
+  width: 100%;
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #bdc3c7;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
-  width: 100%;
+  box-sizing: border-box; 
 }
 
 .formTextarea {
+  width: 100%;
   height: 150px;
   resize: vertical;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .submitButton {
@@ -171,6 +317,11 @@
   border: none;
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* 追加 */
+}
+
+.tab:hover {
+  background-color: #034e76; /* 追加: ホバー時の背景色 */
 }
 
 .activeTab {
@@ -182,6 +333,7 @@
   padding: 30px;
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* 追加 */
 }
 
 .tabs {
@@ -193,6 +345,8 @@
 .content {
   display: flex;
   flex: 1;
+  width: 100%;
+  overflow: hidden;
 }
 
 .sidebar {

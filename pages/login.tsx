@@ -2,15 +2,22 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import { userPool } from '../lib/cognitoConfig';
-import { FaGoogle, FaFacebook, FaTwitter, FaApple } from 'react-icons/fa';
+import { FaMicrosoft } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from '../styles/Home.module.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError('');
+
     const authenticationDetails = new AuthenticationDetails({
       Username: email,
       Password: password,
@@ -28,123 +35,90 @@ const Login = () => {
       },
       onFailure: (err) => {
         console.error('ログイン失敗:', err);
-        // エラーメッセージを表示するなどの処理
+        setError('ログインに失敗しました。メールアドレスとパスワードを確認してください。');
       }
     });
   };
 
   const handleGoogleLogin = () => {
-    // Googleログインの実装
-    console.log('Googleログインが選択されました');
+    const cognitoDomain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
+    const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
+    const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
+
+    const url = `${cognitoDomain}/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&identity_provider=Google`;
+    
+    window.location.href = url;
   };
 
-  const handleFacebookLogin = () => {
-    // Facebookログインの実装
-    console.log('Facebookログインが選択されました');
+  const handleMicrosoftLogin = () => {
+    const cognitoDomain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
+    const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
+    const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
+
+    const url = `${cognitoDomain}/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&identity_provider=Microsoft`;
+    
+    window.location.href = url;
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-md w-full space-y-8">
-      <h2 className="text-center text-3xl font-bold">マイページログイン</h2>
-      
-      <div className="space-y-4">
-        <button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-          <FaGoogle className="w-5 h-5 mr-2" />
-          Sign in with Google
-        </button>
-        <button className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-          <FaFacebook className="w-5 h-5 mr-2" />
-          Facebookでログイン
-        </button>
-        <button className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-500">
-          <FaTwitter className="w-5 h-5 mr-2" />
-          Twitterでログイン
-        </button>
-        <button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-          <FaApple className="w-5 h-5 mr-2" />
-          Sign in with Apple
-        </button>
-      </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                メールアドレス
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="メールアドレス"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                パスワード
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="パスワード"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <div className={styles.loginBox}>
+        <Image
+          src="/logo.png"
+          alt="Arc Lab"
+          width={40}
+          height={40}
+          objectFit="contain"
+        />
+          <h2 className={styles.loginTitle}>メールアドレスでログイン</h2>
+          
+          {error && <p className={styles.errorMessage}>{error}</p>}
+          
+          <form onSubmit={handleSubmit} className={styles.loginForm}>
+            <input
+              type="email"
+              placeholder="メールアドレス"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.formInput}
+              required
+            />
+            <input
+              type="password"
+              placeholder="パスワード"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.formInput}
+              required
+            />
+            <button type="submit" className={styles.loginButton}>
               ログイン
             </button>
+          </form>
+          
+          <Link href="/forgot-password" className={styles.forgotPassword}>
+            パスワードをお忘れの方
+          </Link>
+          
+          <div className={styles.divider}>
+            <span>外部アカウントでログイン</span>
           </div>
-        </form>
-
-        <div className="mt-6">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-gray-50 text-gray-500">または</span>
-            </div>
+          
+          <div className={styles.externalLogin}>
+            <button className={styles.microsoftLogin} onClick={handleMicrosoftLogin}>
+              <FaMicrosoft /> Microsoftアカウントでログイン
+            </button>
+            <button className={styles.googleLogin} onClick={handleGoogleLogin}>
+              <FcGoogle /> Googleアカウントでログイン
+            </button>
           </div>
-
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <div>
-              <button
-                onClick={handleGoogleLogin}
-                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-              >
-                <FaGoogle className="w-5 h-5 mr-2" />
-                <span>Google</span>
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={handleFacebookLogin}
-                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-              >
-                <FaFacebook className="w-5 h-5 mr-2" />
-                <span>Facebook</span>
-              </button>
-            </div>
-          </div>
+          
+          <Link href="/signup" className={styles.createAccount}>
+            新しく企業アカウントを作成する
+          </Link>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

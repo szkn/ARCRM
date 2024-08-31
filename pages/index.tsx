@@ -24,8 +24,8 @@ const Home = () => {
               if (err) {
                 console.error(err);
               } else {
-                const nameAttribute = attributes?.find(attr => attr.Name === 'name');
-                setUsername(nameAttribute?.Value || 'ユーザー名');
+                const emailAttribute = attributes?.find(attr => attr.Name === 'email');
+                setUsername(emailAttribute?.Value || 'メールアドレス不明');
               }
             });
           }
