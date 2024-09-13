@@ -61,71 +61,78 @@ const Login = () => {
   // };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <div className={styles.loginBox}>
-        <Image
-          src="/logo.png"
-          alt="Arc Lab"
-          width={60}
-          height={60}
-          objectFit="contain"
-        />
-          <h2 className={styles.loginTitle}>ARC. Former ログイン</h2>
-          
-          {error && <p className={styles.errorMessage}>{error}</p>}
-          
-          <form onSubmit={handleSubmit} className={styles.loginForm}>
-            <input
-              type="email"
-              placeholder="メールアドレス"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={styles.formInput}
-              required
-            />
-            <input
-              type="password"
-              placeholder="パスワード"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={styles.formInput}
-              required
-            />
-            <button type="submit" className={styles.loginButton}>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-md">
+        <div className="flex flex-col items-center">
+          <Image
+            src="/logo.png"
+            alt="Arc Lab"
+            width={60}
+            height={60}
+            className="object-contain"
+          />
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">ARC. Former ログイン</h2>
+        </div>
+        
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+        
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <input
+                type="email"
+                placeholder="メールアドレス"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="パスワード"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
               ログイン
             </button>
-          </form>
-          
-          <Link href="/forgot-password" className={styles.link}>
+          </div>
+        </form>
+        
+        <div className="text-sm">
+          <Link href="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500">
             パスワードをお忘れの方
           </Link>
+        </div>
 
-          {/*
-          <div className={styles.divider}>
-            <span>外部アカウントでログイン</span>
+        <div className="mt-6">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">または</span>
+            </div>
           </div>
-          
-          <div className={styles.externalLogin}>
-            <button className={styles.microsoftLogin} onClick={handleMicrosoftLogin}>
-              <FaMicrosoft /> Microsoftアカウントでログイン
-            </button>
-            <button className={styles.googleLogin} onClick={handleGoogleLogin}>
-              <FcGoogle /> Googleアカウントでログイン
-            </button>
-          </div>
-          */}
-          
-          <div className={styles.divider}>
-          <span>または</span>
-          </div>
+        </div>
 
-          <Link href="/signup" className={styles.link}>
+        <div className="text-sm">
+          <Link href="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
             新しく企業アカウントを作成する
           </Link>
-
         </div>
-      </main>
+      </div>
     </div>
   );
 };

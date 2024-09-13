@@ -32,40 +32,45 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <div className={styles.loginBox}>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-md">
+        <div className="flex flex-col items-center">
           <Image
             src="/logo.png"
             alt="Arc Lab"
             width={40}
             height={40}
-            objectFit="contain"
+            className="object-contain"
           />
-          <h2 className={styles.loginTitle}>パスワードをお忘れの方</h2>
-          
-          {message && <p className={styles.successMessage}>{message}</p>}
-          {error && <p className={styles.errorMessage}>{error}</p>}
-          
-          <form onSubmit={handleSubmit} className={styles.loginForm}>
-            <input
-              type="email"
-              placeholder="メールアドレス"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={styles.formInput}
-              required
-            />
-            <button type="submit" className={styles.loginButton}>
-              パスワードリセット
-            </button>
-          </form>
-          
-          <Link href="/login" className={styles.backToLogin}>
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">パスワードをお忘れの方</h2>
+        </div>
+        
+        {message && <p className="mt-2 text-sm text-green-600">{message}</p>}
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+        
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          <input
+            type="email"
+            placeholder="メールアドレス"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            required
+          />
+          <button
+            type="submit"
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            パスワードリセット
+          </button>
+        </form>
+        
+        <div className="text-sm mt-3">
+          <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
             ログインページに戻る
           </Link>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

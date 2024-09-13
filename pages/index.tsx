@@ -5,8 +5,8 @@ import CompanyList from '../components/CompanyList';
 import EmailTool from '../components/EmailTool';
 import ContactForm from '../components/ContactForm';
 import { userPool } from '../lib/cognitoConfig';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import Button from '../components/common/Button';
+import Input from '../components/common/Input';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('contact');
@@ -63,7 +63,11 @@ const Home = () => {
         <h1 className="text-2xl font-bold m-0">ARC. Former</h1>
         <div className="flex items-center">
           <span>{username}</span>
-          <Button variant="secondary" onClick={handleLogout} className="ml-2.5 text-sm">
+          <Button 
+            variant="outline" 
+            onClick={handleLogout} 
+            className="ml-2.5 text-sm !bg-white !text-blue-500 !border-blue-500 hover:!bg-blue-100"
+          >
             ログアウト
           </Button>
         </div>

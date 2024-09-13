@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import styles from '../styles/Home.module.css';
-import Button from './Button';
+import Button from './common/Button';
 
 
 interface Company {
