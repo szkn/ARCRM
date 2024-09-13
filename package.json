@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "ARC CRMは、Vercelでホストされている顧客関係管理（CRM）のためのウェブアプリケーションです。Next.jsとTypeScriptを使用して構築されており、Amazon Cognitoを使用して認証を行っています。",
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
     "amazon-cognito-identity-js": "^6.3.12",
     "next": "^14.2.7",
     "react": "^18.3.1",
