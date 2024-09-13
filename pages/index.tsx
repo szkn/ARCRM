@@ -8,7 +8,7 @@ import ContactForm from '../components/ContactForm';
 import { userPool } from '../lib/cognitoConfig';
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState('companies');
+  const [activeTab, setActiveTab] = useState('contact');
   const [username, setUsername] = useState('');
   const router = useRouter();
 
@@ -78,9 +78,9 @@ const Home = () => {
           ))}
         </nav>
         <main className={styles.mainContent}>
+          {activeTab === 'contact' && <ContactForm />}
           {activeTab === 'companies' && <CompanyList />}
           {activeTab === 'email' && <EmailTool />}
-          {activeTab === 'contact' && <ContactForm />}
         </main>
       </div>
     </div>

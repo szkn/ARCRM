@@ -378,3 +378,37 @@
 .tab-content {
   padding: 20px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.paginationButton {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.paginationButton:hover {
+  background-color: #2980b9;
+}
+
+.paginationButton:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.paginationInfo {
+  margin: 0 10px;
+  font-size: 14px;
+  color: #34495e;
+}

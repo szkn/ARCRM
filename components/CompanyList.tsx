@@ -1,29 +1,53 @@
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from '../lib/supabaseClient';
 import styles from '../styles/Home.module.css';
 
 interface Company {
   id: number;
-  name: string;
-  industry: string;
+  accountName: string;
+  domain: string;
+  industry?: string;
+  location?: string;
+  scale?: string;
 }
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const itemsPerPage = 20; // 1ページあたりの表示件数
 
   useEffect(() => {
-    // TODO: バックエンドのAPIを呼び出して企業情報を取得する
-    setCompanies([
-      { id: 1, name: '株式会社A', industry: 'IT' },
-      { id: 2, name: '株式会社B', industry: '製造' },
-      { id: 3, name: '株式会社C', industry: 'IT' },
-    ]);
-  }, []);
+    const fetchCompanies = async () => {
+      console.log('データ取得開始');
+      try {
+        const { data, error, count } = await supabase
+          .from('companies')
+          .select('*', { count: 'exact' })
+          .range((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage - 1);
+        
+        if (error) {
+          console.error('Supabaseエラー:', error);
+        } else {
+          console.log('取得したデータ:', data);
+          setCompanies(data as Company[] || []);
+          setTotalCount(count || 0);
+        }
+      } catch (e) {
+        console.error('予期せぬエラー:', e);
+      }
+    };
+
+    fetchCompanies();
+  }, [currentPage]);
 
   const filteredCompanies = companies.filter(company =>
-    company.industry.toLowerCase().includes(searchTerm.toLowerCase())
+    company.industry?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false
   );
+  console.log('フィルター後の会社数:', filteredCompanies.length);
+
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   return (
     <>
@@ -40,21 +64,38 @@ const CompanyList = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>ID</th>
             <th>会社名</th>
+            <th>ドメイン</th>
             <th>業界</th>
           </tr>
         </thead>
         <tbody>
           {filteredCompanies.map((company) => (
             <tr key={company.id}>
-              <td>{company.id}</td>
-              <td>{company.name}</td>
+              <td>{company.accountName}</td>
+              <td>{company.domain}</td>
               <td>{company.industry}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div className={styles.pagination}>
+        <button 
+          className={styles.paginationButton}
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          前へ
+        </button>
+        <span className={styles.paginationInfo}>{currentPage} / {totalPages}</span>
+        <button 
+          className={styles.paginationButton}
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+          次へ
+        </button>
+      </div>
     </>
   );
 };
