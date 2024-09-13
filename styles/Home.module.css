@@ -89,31 +89,39 @@
   background-color: #2855b0;
 }
 
-.forgotPassword {
-  display: block;
-  text-align: center;
-  margin-top: 1rem;
-  color: #3366cc;
+.link {
+  color: #0070f3;
   text-decoration: none;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.link:first-of-type {
+  margin-top: 1.5rem; /* 上部のスペースを増やす */
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .divider {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .divider::before,
 .divider::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0; /* 薄いグレーの線 */
 }
 
 .divider span {
-  padding: 0 0.5rem;
+  padding: 0 10px;
   color: #666;
+  font-size: 0.9rem;
 }
 
 .externalLogin {

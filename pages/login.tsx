@@ -97,11 +97,11 @@ const Login = () => {
             </button>
           </form>
           
-          <Link href="/forgot-password" className={styles.forgotPassword}>
+          <Link href="/forgot-password" className={styles.link}>
             パスワードをお忘れの方
           </Link>
-          
-        {/*
+
+          {/*
           <div className={styles.divider}>
             <span>外部アカウントでログイン</span>
           </div>
@@ -116,9 +116,14 @@ const Login = () => {
           </div>
           */}
           
-          <Link href="/signup" className={styles.createAccount}>
+          <div className={styles.divider}>
+          <span>または</span>
+          </div>
+
+          <Link href="/signup" className={styles.link}>
             新しく企業アカウントを作成する
           </Link>
+
         </div>
       </main>
     </div>
