@@ -38,9 +38,9 @@ const Home = () => {
   }, []);
 
   const tabs = [
-    { id: 'companies', label: '会社情報一覧' },
-    { id: 'email', label: 'メール自動送信ツール' },
     { id: 'contact', label: 'お問合せフォーム' },
+    { id: 'companies', label: '会社情報一覧' },
+    // { id: 'email', label: 'メール自動送信ツール' },
   ];
 
   const handleLogout = () => {
@@ -59,7 +59,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>ARC CRM</h1>
+        <h1 className={styles.title}>ARC. Former</h1>
         <div className={styles.userInfo}>
           <span>{username}</span>
           <button onClick={handleLogout} className={styles.logoutButton}>ログアウト</button>

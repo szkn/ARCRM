@@ -20,6 +20,7 @@ const ContactForm = () => {
   const [message, setMessage] = useState('');
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,14 +29,75 @@ const ContactForm = () => {
 
     const domainList = domains.split('\n').filter(d => d.trim() !== '');
     
-    for (let i = 0; i < domainList.length; i++) {
-      try {
-        await sendForm(domainList[i]);
-        setProgress(((i + 1) / domainList.length) * 100);
-      } catch (err) {
-        setError(`${domainList[i]}への送信中にエラーが発生しました。`);
-        break;
+    try {
+        // 通知を送信
+        await sendNotification();
+
+        // 送信完了を設定
+        setIsSubmitted(true);
+        
+        // for (let i = 0; i < domainList.length; i++) {
+        //   try {
+        //     await sendForm(domainList[i]);
+        //     setProgress(((i + 1) / domainList.length) * 100);
+        //   } catch (err) {
+        //     if (err instanceof Error) {
+        //       setError(`${domainList[i]}への送信中にエラーが発生しました: ${err.message}`);
+        //     } else {
+        //       setError(`${domainList[i]}への送信中に予期せぬエラーが発生しました。`);
+        //     }
+        //     break;
+        //   }
+        // }
+
+        // アラートを表示
+        alert('送信が完了しました！');
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(`通知の送信中にエラーが発生しました: ${err.message}`);
+      } else {
+        setError('通知の送信中に予期せぬエラーが発生しました。');
       }
+    }
+  };
+
+  const sendNotification = async () => {
+    try {
+      console.log('通知を送信中...');
+      const response = await fetch('/api/notify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          domains,
+          nameLast,
+          nameFirst,
+          nameKanaLast,
+          nameKanaFirst,
+          email,
+          subject,
+          company,
+          title,
+          department,
+          phone: `${phone1}-${phone2}-${phone3}`,
+          postalCode: `${postalCode1}-${postalCode2}`,
+          message,
+        }),
+      });
+      
+      const responseText = await response.text();
+      console.log('APIの応答:', response.status, responseText);
+
+      if (!response.ok) {
+        throw new Error(`通知の送信に失敗しました: ${response.status} ${responseText}`);
+      }
+      
+      const data = JSON.parse(responseText);
+      console.log('通知送信成功:', data);
+    } catch (error) {
+      console.error('通知エラー:', error);
+      throw error;
     }
   };
 
@@ -195,7 +257,7 @@ const ContactForm = () => {
             id="phone2"
             value={phone2}
             onChange={(e) => setPhone2(e.target.value)}
-            maxLength={4}
+            maxLength={5}
             className={styles.formInput}
           />
           <span>-</span>
@@ -204,7 +266,7 @@ const ContactForm = () => {
             id="phone3"
             value={phone3}
             onChange={(e) => setPhone3(e.target.value)}
-            maxLength={4}
+            maxLength={5}
             className={styles.formInput}
           />
         </div>
@@ -241,6 +303,9 @@ const ContactForm = () => {
         />
       </div>
       <button type="submit" className={styles.submitButton}>実行</button>
+      {isSubmitted && (
+        <p className={styles.success}>送信が完了しました！</p>
+      )}
       {progress > 0 && (
         <div className={styles.progress}>
           <div 

@@ -67,8 +67,8 @@ const Login = () => {
         <Image
           src="/logo.png"
           alt="Arc Lab"
-          width={40}
-          height={40}
+          width={60}
+          height={60}
           objectFit="contain"
         />
           <h2 className={styles.loginTitle}>メールアドレスでログイン</h2>

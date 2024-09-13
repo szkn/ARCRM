@@ -241,9 +241,10 @@
 }
 
 .phoneInputs input:first-child {
-  width: 5rem;
+  width: 4rem;
 }
 
+.phoneInputs input:nth-child(3),
 .postcodeInputs input:last-child {
   width: 5rem;
 }
