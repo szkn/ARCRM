@@ -71,7 +71,7 @@ const Login = () => {
           height={60}
           objectFit="contain"
         />
-          <h2 className={styles.loginTitle}>メールアドレスでログイン</h2>
+          <h2 className={styles.loginTitle}>ログイン</h2>
           
           {error && <p className={styles.errorMessage}>{error}</p>}
           
