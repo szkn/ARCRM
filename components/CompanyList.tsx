@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import styles from '../styles/Home.module.css';
+import Button from './Button';
+
 
 interface Company {
   id: number;
@@ -50,53 +52,57 @@ const CompanyList = () => {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   return (
-    <>
-      <h2>会社情報一覧</h2>
-      <div className={styles.searchContainer}>
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold mb-4">会社情報一覧</h2>
+      <div className="mb-4">
         <input
           type="text"
           placeholder="業界で検索"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.formInput}
+          className="w-full p-2 border border-gray-300 rounded"
         />
       </div>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>会社名</th>
-            <th>ドメイン</th>
-            <th>業界</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredCompanies.map((company) => (
-            <tr key={company.id}>
-              <td>{company.accountName}</td>
-              <td>{company.domain}</td>
-              <td>{company.industry}</td>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-300 p-2 text-left">会社名</th>
+              <th className="border border-gray-300 p-2 text-left">ドメイン</th>
+              <th className="border border-gray-300 p-2 text-left">業界</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className={styles.pagination}>
-        <button 
-          className={styles.paginationButton}
+          </thead>
+          <tbody>
+            {filteredCompanies.map((company) => (
+              <tr key={company.id} className="hover:bg-gray-50">
+                <td className="border border-gray-300 p-2">{company.accountName}</td>
+                <td className="border border-gray-300 p-2">{company.domain}</td>
+                <td className="border border-gray-300 p-2">{company.industry}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="flex justify-center items-center mt-4 space-x-2">
+        <Button
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
+          className="px-4 py-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           前へ
-        </button>
-        <span className={styles.paginationInfo}>{currentPage} / {totalPages}</span>
-        <button 
-          className={styles.paginationButton}
+        </Button>
+        <span className="text-gray-600">
+          {currentPage} / {totalPages}
+        </span>
+        <Button
           onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
+          className="px-4 py-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           次へ
-        </button>
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 

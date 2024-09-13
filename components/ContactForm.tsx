@@ -134,162 +134,162 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <h2>お問い合わせフォーム自動入力</h2>
-      <div>
-        <label htmlFor="domains">ドメイン（改行で複数指定可）</label>
+    <form onSubmit={handleSubmit} className="mt-8 max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-center">お問い合わせフォーム自動入力</h2>
+      <div className="mb-4">
+        <label htmlFor="domains" className="block mb-2 font-medium text-gray-700">ドメイン（改行で複数指定可）</label>
         <textarea
           id="domains"
           value={domains}
           onChange={(e) => setDomains(e.target.value)}
           rows={5}
-          className={styles.formTextarea}
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
-      <div className={styles.formRow}>
-        <div className={styles.nameInput}>
-          <label htmlFor="name_last">姓</label>
+      <div className="flex mb-4 space-x-4">
+        <div className="flex-1">
+          <label htmlFor="name_last" className="block mb-2 font-medium text-gray-700">姓</label>
           <input
             type="text"
             id="name_last"
             value={nameLast}
             onChange={(e) => setNameLast(e.target.value)}
-            className={styles.formInput}
+            className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div className={styles.nameInput}>
-          <label htmlFor="name_first">名</label>
+        <div className="flex-1">
+          <label htmlFor="name_first" className="block mb-2 font-medium text-gray-700">名</label>
           <input
             type="text"
             id="name_first"
             value={nameFirst}
             onChange={(e) => setNameFirst(e.target.value)}
-            className={styles.formInput}
+            className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
       </div>
-      <div className={styles.formRow}>
-        <div>
-          <label htmlFor="name_kana_last">姓（フリガナ）</label>
+      <div className="flex mb-4 space-x-4">
+        <div className="flex-1">
+          <label htmlFor="name_kana_last" className="block mb-2 font-medium text-gray-700">姓（フリガナ）</label>
           <input
             type="text"
             id="name_kana_last"
             value={nameKanaLast}
             onChange={(e) => setNameKanaLast(e.target.value)}
-            className={styles.formInput}
+            className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div>
-          <label htmlFor="name_kana_first">名（フリガナ）</label>
+        <div className="flex-1">
+          <label htmlFor="name_kana_first" className="block mb-2 font-medium text-gray-700">名（フリガナ）</label>
           <input
             type="text"
             id="name_kana_first"
             value={nameKanaFirst}
             onChange={(e) => setNameKanaFirst(e.target.value)}
-            className={styles.formInput}
+            className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
       </div>
-      <div>
-        <label htmlFor="email">メールアドレス</label>
+      <div className="mb-4">
+        <label htmlFor="email" className="block mb-2 font-medium text-gray-700">メールアドレス</label>
         <input
           type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={styles.formInput}
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
-      <div>
-        <label htmlFor="subject">件名</label>
+      <div className="mb-4">
+        <label htmlFor="subject" className="block mb-2 font-medium text-gray-700">件名</label>
         <input
           type="text"
           id="subject"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          className={styles.formInput}
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
-      <div>
-        <label htmlFor="company">会社名</label>
+      <div className="mb-4">
+        <label htmlFor="company" className="block mb-2 font-medium text-gray-700">会社名</label>
         <input
           type="text"
           id="company"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
-          className={styles.formInput}
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
-      <div>
-        <label htmlFor="title">役職</label>
+      <div className="mb-4">
+        <label htmlFor="title" className="block mb-2 font-medium text-gray-700">役職</label>
         <input
           type="text"
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className={styles.formInput}
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
-      <div>
-        <label htmlFor="department">部署</label>
+      <div className="mb-4">
+        <label htmlFor="department" className="block mb-2 font-medium text-gray-700">部署</label>
         <input
           type="text"
           id="department"
           value={department}
           onChange={(e) => setDepartment(e.target.value)}
-          className={styles.formInput}
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
-      <div>
-        <label htmlFor="phone">電話番号</label>
-        <div className={styles.phoneInputs}>
+      <div className="mb-4">
+        <label htmlFor="phone" className="block mb-2 font-medium text-gray-700">電話番号</label>
+        <div className="flex space-x-2">
           <input
             type="tel"
             id="phone1"
             value={phone1}
             onChange={(e) => setPhone1(e.target.value)}
             maxLength={4}
-            className={styles.formInput}
+            className="w-1/3 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
-          <span>-</span>
+          <span className="self-center">-</span>
           <input
             type="tel"
             id="phone2"
             value={phone2}
             onChange={(e) => setPhone2(e.target.value)}
             maxLength={5}
-            className={styles.formInput}
+            className="w-1/3 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
-          <span>-</span>
+          <span className="self-center">-</span>
           <input
             type="tel"
             id="phone3"
             value={phone3}
             onChange={(e) => setPhone3(e.target.value)}
             maxLength={5}
-            className={styles.formInput}
+            className="w-1/3 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
       </div>
-      <div>
-        <label htmlFor="postcode">郵便番号</label>
-        <div className={styles.postcodeInputs}>
+      <div className="mb-4">
+        <label htmlFor="postcode" className="block mb-2 font-medium text-gray-700">郵便番号</label>
+        <div className="flex space-x-2">
           <input
             type="text"
             id="postcode1"
             value={postalCode1}
             onChange={(e) => setPostalCode1(e.target.value)}
             maxLength={3}
-            className={styles.formInput}
+            className="w-1/3 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
-          <span>-</span>
+          <span className="self-center">-</span>
           <input
             type="text"
             id="postcode2"
             value={postalCode2}
             onChange={(e) => setPostalCode2(e.target.value)}
             maxLength={4}
-            className={styles.formInput}
+            className="w-2/3 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
       </div>
@@ -302,25 +302,23 @@ const ContactForm = () => {
           className={styles.formTextarea}
         />
       </div>
-      <button type="submit" className={styles.submitButton}>実行</button>
+      <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">実行</button>
       {isSubmitted && (
-        <p className={styles.success}>送信が完了しました！</p>
+        <p className="mt-4 text-green-600 font-medium">送信が完了しました。</p>
       )}
       {progress > 0 && (
-        <div className={styles.progress}>
+        <div className="mt-4 bg-gray-200 rounded-full h-2.5">
           <div 
-            className={styles.progressBar} 
+            className="bg-blue-600 h-2.5 rounded-full"
             style={{width: `${progress}%`}}
             role="progressbar" 
             aria-valuenow={progress} 
             aria-valuemin={0} 
             aria-valuemax={100}
-          >
-            {progress}%
-          </div>
+          ></div>
         </div>
       )}
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p className="mt-4 text-red-600">{error}</p>}
     </form>
   );
 };

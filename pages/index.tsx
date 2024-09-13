@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import styles from '../styles/Home.module.css';
 import CompanyList from '../components/CompanyList';
 import EmailTool from '../components/EmailTool';
 import ContactForm from '../components/ContactForm';
 import { userPool } from '../lib/cognitoConfig';
+import Button from '../components/Button';
+import Input from '../components/Input';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('contact');
@@ -57,27 +58,31 @@ const Home = () => {
     }
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>ARC. Former</h1>
-        <div className={styles.userInfo}>
+    <div className="flex flex-col min-h-screen bg-gray-100 m-0 p-0 rounded-3xl overflow-hidden">
+      <header className="bg-blue-500 text-white py-4 px-8 flex justify-between items-center shadow-md w-full box-border">
+        <h1 className="text-2xl font-bold m-0">ARC. Former</h1>
+        <div className="flex items-center">
           <span>{username}</span>
-          <button onClick={handleLogout} className={styles.logoutButton}>ログアウト</button>
+          <Button variant="secondary" onClick={handleLogout} className="ml-2.5 text-sm">
+            ログアウト
+          </Button>
         </div>
       </header>
-      <div className={styles.content}>
-        <nav className={styles.sidebar}>
+      <div className="flex flex-1 w-full overflow-hidden">
+        <nav className="w-50 bg-blue-900 p-5 flex flex-col">
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`${styles.tab} ${activeTab === tab.id ? styles.activeTab : ''}`}
+              className={`py-2.5 mb-2.5 text-white border-none text-left cursor-pointer transition duration-300 ${
+                activeTab === tab.id ? 'bg-blue-700 w-full' : 'bg-transparent hover:bg-blue-800'
+              }`}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
             </button>
           ))}
         </nav>
-        <main className={styles.mainContent}>
+        <main className="flex-1 p-8 bg-white shadow-md overflow-y-auto">
           {activeTab === 'contact' && <ContactForm />}
           {activeTab === 'companies' && <CompanyList />}
           {activeTab === 'email' && <EmailTool />}

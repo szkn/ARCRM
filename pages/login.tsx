@@ -40,25 +40,25 @@ const Login = () => {
     });
   };
 
-  const handleGoogleLogin = () => {
-    const cognitoDomain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
-    const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
-    const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
+  // const handleGoogleLogin = () => {
+  //   const cognitoDomain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
+  //   const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
+  //   const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
-    const url = `${cognitoDomain}/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&identity_provider=Google`;
+  //   const url = `${cognitoDomain}/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&identity_provider=Google`;
     
-    window.location.href = url;
-  };
+  //   window.location.href = url;
+  // };
 
-  const handleMicrosoftLogin = () => {
-    const cognitoDomain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
-    const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
-    const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
+  // const handleMicrosoftLogin = () => {
+  //   const cognitoDomain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
+  //   const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
+  //   const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
-    const url = `${cognitoDomain}/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&identity_provider=Microsoft`;
+  //   const url = `${cognitoDomain}/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&identity_provider=Microsoft`;
     
-    window.location.href = url;
-  };
+  //   window.location.href = url;
+  // };
 
   return (
     <div className={styles.container}>
