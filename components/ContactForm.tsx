@@ -1,5 +1,4 @@
 import { useState, FormEvent } from 'react';
-import styles from '../styles/Home.module.css';
 
 const ContactForm = () => {
   const [domains, setDomains] = useState('');
@@ -135,7 +134,7 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">お問い合わせフォーム自動入力</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">ARC. Former</h2>
       <div className="mb-4">
         <label htmlFor="domains" className="block mb-2 font-medium text-gray-700">ドメイン（改行で複数指定可）</label>
         <textarea
@@ -293,13 +292,13 @@ const ContactForm = () => {
           />
         </div>
       </div>
-      <div>
-        <label htmlFor="message">メッセージ</label>
+      <div className="mb-4">
+        <label htmlFor="message" className="block mb-2 font-medium text-gray-700">メッセージ</label>
         <textarea
           id="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className={styles.formTextarea}
+          className="w-full h-40 resize-y px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
         />
       </div>
       <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">実行</button>

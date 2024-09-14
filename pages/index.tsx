@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../styles/Home.module.css';
 import CompanyList from '../components/CompanyList';
 import EmailTool from '../components/EmailTool';
 import ContactForm from '../components/ContactForm';
@@ -59,7 +58,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 m-0 p-0 rounded-3xl overflow-hidden">
-      <header className="bg-blue-500 text-white py-4 px-8 flex justify-between items-center shadow-md w-full box-border">
+      <header className="bg-arc-primary text-white py-4 px-8 flex justify-between items-center shadow-md w-full box-border">
         <h1 className="text-2xl font-bold m-0">ARC. Former</h1>
         <div className="flex items-center">
           <span>{username}</span>
@@ -73,12 +72,12 @@ const Home = () => {
         </div>
       </header>
       <div className="flex flex-1 w-full overflow-hidden">
-        <nav className="w-50 bg-blue-900 p-5 flex flex-col">
+        <nav className="w-50 bg-arc-primary-dark p-5 flex flex-col">
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`py-2.5 mb-2.5 text-white border-none text-left cursor-pointer transition duration-300 ${
-                activeTab === tab.id ? 'bg-blue-700 w-full' : 'bg-transparent hover:bg-blue-800'
+              className={`py-2.5 mb-2.5 text-white border-none text-left cursor-pointer transition duration-300 w-full ${
+                activeTab === tab.id ? 'bg-blue-700' : 'bg-transparent hover:bg-blue-800'
               }`}
               onClick={() => setActiveTab(tab.id)}
             >
@@ -89,7 +88,7 @@ const Home = () => {
         <main className="flex-1 p-8 bg-white shadow-md overflow-y-auto">
           {activeTab === 'contact' && <ContactForm />}
           {activeTab === 'companies' && <CompanyList />}
-          {activeTab === 'email' && <EmailTool />}
+          {/* {activeTab === 'email' && <EmailTool />} */}
         </main>
       </div>
     </div>

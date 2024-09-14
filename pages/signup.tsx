@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { userPool } from '../lib/cognitoConfig';
-import styles from '../styles/Home.module.css';
 
 const Signup = () => {
   const [email, setEmail] = useState('');

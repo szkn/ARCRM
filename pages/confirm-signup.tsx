@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { userPool } from '../lib/cognitoConfig';
-import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 
 

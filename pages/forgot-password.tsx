@@ -3,7 +3,6 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
 import { userPool } from '../lib/cognitoConfig';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');

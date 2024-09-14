@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import { userPool } from '../lib/cognitoConfig';
-import { FaMicrosoft } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
+// import { FaMicrosoft } from 'react-icons/fa';
+// import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
   const [email, setEmail] = useState('');

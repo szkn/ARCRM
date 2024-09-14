@@ -63,19 +63,23 @@ const CompanyList = () => {
         />
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+        <table className="w-full border-collapse table-fixed">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border border-gray-300 p-2 text-left">会社名</th>
-              <th className="border border-gray-300 p-2 text-left">ドメイン</th>
-              <th className="border border-gray-300 p-2 text-left">業界</th>
+              <th className="border border-gray-300 p-2 text-left w-1/3">会社名</th>
+              <th className="border border-gray-300 p-2 text-left w-1/3">ドメイン</th>
+              <th className="border border-gray-300 p-2 text-left w-1/3">業界</th>
             </tr>
           </thead>
           <tbody>
             {filteredCompanies.map((company) => (
               <tr key={company.id} className="hover:bg-gray-50">
                 <td className="border border-gray-300 p-2">{company.accountName}</td>
-                <td className="border border-gray-300 p-2">{company.domain}</td>
+                <td className="border border-gray-300 p-2">
+                  <a href={`https://${company.domain}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                    {company.domain}
+                  </a>
+                </td>
                 <td className="border border-gray-300 p-2">{company.industry}</td>
               </tr>
             ))}
