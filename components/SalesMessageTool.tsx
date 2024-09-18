@@ -119,6 +119,24 @@ const SalesMessageTool: React.FC = () => {
                     label="会社名"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
+                    required
+                />
+                <Input
+                    label="送信者名"
+                    value={senderName}
+                    onChange={(e) => setSenderName(e.target.value)}
+                    required
+                />
+                <Input
+                    label="送信者メールアドレス"
+                    value={senderEmail}
+                    onChange={(e) => setSenderEmail(e.target.value)}
+                    required
+                />
+                <Input
+                    label="送信者役職"
+                    value={senderPosition}
+                    onChange={(e) => setSenderPosition(e.target.value)}
                 />
                 <Input
                     label="製品名"
@@ -129,21 +147,6 @@ const SalesMessageTool: React.FC = () => {
                     label="面談予約URL"
                     value={meetingUrl}
                     onChange={(e) => setMeetingUrl(e.target.value)}
-                />
-                <Input
-                    label="送信者名"
-                    value={senderName}
-                    onChange={(e) => setSenderName(e.target.value)}
-                />
-                <Input
-                    label="送信者役職"
-                    value={senderPosition}
-                    onChange={(e) => setSenderPosition(e.target.value)}
-                />
-                <Input
-                    label="送信者メールアドレス"
-                    value={senderEmail}
-                    onChange={(e) => setSenderEmail(e.target.value)}
                 />
                 <Button type="submit" disabled={isLoading}>
                     {isLoading ? '生成中...' : '営業文面を生成'}
