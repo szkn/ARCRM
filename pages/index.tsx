@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import HomeScreen from '../components/HomeScreen';
 import CompanyList from '../components/CompanyList';
+import SalesMessageTool from '../components/SalesMessageTool';
 import EmailTool from '../components/EmailTool';
 import ContactForm from '../components/ContactForm';
 import { userPool } from '../lib/cognitoConfig';
@@ -8,7 +10,7 @@ import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState('contact');
+  const [activeTab, setActiveTab] = useState('home');
   const [username, setUsername] = useState('');
   const router = useRouter();
 
@@ -38,8 +40,10 @@ const Home = () => {
   }, []);
 
   const tabs = [
+    { id: 'home', label: 'ホーム' },
     { id: 'contact', label: 'お問合せフォーム' },
     { id: 'companies', label: '会社情報一覧' },
+    { id: 'sales-message', label: '営業文面作成ツール' },
     // { id: 'email', label: 'メール自動送信ツール' },
   ];
 
@@ -86,8 +90,10 @@ const Home = () => {
           ))}
         </nav>
         <main className="flex-1 p-8 bg-white shadow-md overflow-y-auto">
+          {activeTab === 'home' && <HomeScreen username={username} />}
           {activeTab === 'contact' && <ContactForm />}
           {activeTab === 'companies' && <CompanyList />}
+          {activeTab === 'sales-message' && <SalesMessageTool />}
           {/* {activeTab === 'email' && <EmailTool />} */}
         </main>
       </div>
